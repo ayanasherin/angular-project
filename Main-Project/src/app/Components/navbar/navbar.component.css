@@ -1,0 +1,25 @@
+.navbar {
+    background-color: transparent !important; 
+    position: fixed; 
+    top: 0; 
+    width: 100%; 
+    z-index: 1000; 
+    padding: 1rem; 
+}
+
+.navbar .navbar-brand {
+    color:#FF7F50; 
+}
+
+.navbar .nav-link {
+    color: #FF7F50; 
+    margin-left: 15px;
+}
+
+.navbar .nav-link:hover {
+    color: rgba(115, 146, 218, 0.8); 
+}
+
+.navbar-brand img {
+    height: 40px;
+}

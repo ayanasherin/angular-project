@@ -1,0 +1,232 @@
+<!-- <app-navbar></app-navbar> -->
+
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Professional Development Workshop Registration Form</h2>
+  <form #registrationForm="ngForm" (ngSubmit)="onSubmit(registrationForm)" novalidate>
+    <div class="row mb-3">
+      <div class="col-md-5">
+        <label for="prefix" class="form-label">Prefix</label>
+        <select id="prefix" class="form-select" name="prefix" [(ngModel)]="model.prefix" required>
+          <option value="" disabled selected>Select</option>
+          <option>Mr.</option>
+          <option>Ms.</option>
+          <option>Dr.</option>
+        </select>
+        <div *ngIf="registrationForm.controls['prefix']?.invalid && registrationForm.controls['prefix']?.touched" class="text-danger">
+          Prefix is required.
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-5">
+        <label for="firstName" class="form-label">First Name</label>
+        <input type="text" id="firstName" class="form-control" name="firstName" [(ngModel)]="model.firstname" required
+               minlength="4" pattern="^[a-zA-Z]+$" />
+        <div *ngIf="isFieldInvalid('firstName', registrationForm)" class="text-danger">
+          First Name is required and must be at least 4 characters long, containing only letters.
+        </div>
+      </div>
+
+      <div class="col-md-5">
+        <label for="lastName" class="form-label">Last Name</label>
+        <input type="text" id="lastName" class="form-control" name="lastName" [(ngModel)]="model.lastname" required
+                pattern="^[a-zA-Z]+$" />
+        <div *ngIf="isFieldInvalid('lastName', registrationForm)" class="text-danger">
+          Last Name is required,containing only letters.
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-5">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" id="email" class="form-control" name="email" [(ngModel)]="model.email" required pattern="^[a-zA-Z][a-zA-Z0-9]*@[a-zA-Z]+\.[a-zA-Z]{2,}$" />
+        <div *ngIf="isFieldInvalid('email', registrationForm)" class="text-danger">
+          Valid email is required.
+        </div>
+      </div>
+
+     
+      <div class="col-md-6">
+        <label for="password" class="form-label">Password</label>
+        <input
+          type="password"
+          id="password"
+          class="form-control"
+          name="password"
+          [(ngModel)]="model.password"
+          required
+          minlength="8"
+          pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}"
+          #password="ngModel"
+        />
+        
+        <div *ngIf="password.errors?.['required'] && password.touched" class="text-danger">
+          Password is required.
+        </div>
+        
+        
+        <div *ngIf="password.errors?.['minlength'] && password.touched" class="text-danger">
+          Password must be at least 8 characters long.
+        </div>
+        
+        
+        <div *ngIf="password.errors?.['pattern'] && password.touched" class="text-danger">
+          Password must contain at least one lowercase letter, one uppercase letter, one number, and one special character.
+        </div>
+      </div>
+      
+    </div>
+
+    
+    
+
+    <div class="row mb-3">
+      <div class="col-md-5">
+        <label for="addressline1" class="form-label">Address Line 1</label>
+        <input type="text" id="addressline1" class="form-control" name="addressline1" [(ngModel)]="model.addressline1" required />
+        <div *ngIf="isFieldInvalid('addressline1', registrationForm)" class="text-danger">
+          Address Line 1 is required.
+        </div>
+      </div>
+
+      <div class="col-md-5">
+        <label for="adressline2" class="form-label">Address Line 2</label>
+        <input type="text" id="adressline2" class="form-control" name="adressline2" [(ngModel)]="model.adressline2" />
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-5">
+        <label for="city" class="form-label">City</label>
+        <input type="text" id="city" class="form-control" name="city" [(ngModel)]="model.city" required pattern="^[a-zA-Z\s]+$" />
+        <div *ngIf="isFieldInvalid('city', registrationForm)" class="text-danger">
+          City is required and must contain only letters.
+        </div>
+      </div>
+
+      <div class="col-md-5">
+        <label for="state" class="form-label">State</label>
+        <input type="text" id="state" class="form-control" name="state" [(ngModel)]="model.state" required pattern="^[a-zA-Z\s]+$" />
+        <div *ngIf="isFieldInvalid('state', registrationForm)" class="text-danger">
+          State is required and must contain only letters.
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-5">
+        <label for="zipcode" class="form-label">Zip Code</label>
+        <input type="text" id="zipcode" class="form-control" name="zipcode" [(ngModel)]="model.zipcode" required pattern="^\d{6}(-\d{4})?$" />
+        <div *ngIf="isFieldInvalid('zipcode', registrationForm)" class="text-danger">
+          Valid Zip Code is required .
+        </div>
+      </div>
+
+      <div class="col-md-5">
+        <label for="countryCode" class="form-label">Country Code</label>
+        <select
+          id="countryCode"
+          class="form-control"
+          name="countryCode"
+          [(ngModel)]="model.countrycode"
+          required
+        >
+          <option value="" disabled selected>Select Country Code</option>
+          <option value="+91">+91 (India)</option>
+          <option value="+1">+1 (USA)</option>
+          <option value="+44">+44 (UK)</option>
+          <option value="+61">+61 (Australia)</option>
+        </select>
+      
+        <div *ngIf="isFieldInvalid('countryCode', registrationForm)" class="text-danger">
+          Please select a country code.
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-5">
+        <label for="phone" class="form-label">Phone</label>
+        <input type="tel" id="phone" class="form-control" name="phone" [(ngModel)]="model.phone" required pattern="^\d{10}$" />
+        <div *ngIf="isFieldInvalid('phone', registrationForm)" class="text-danger">
+          Phone is required and must be 10 digits long.
+        </div>
+      </div>
+
+      <div class="col-md-5">
+        <label for="bachelorDegree" class="form-label">Bachelor Degree</label>
+        <input type="text" id="bachelorDegree" class="form-control" name="bachelorDegree" [(ngModel)]="model.bachelorDegree" required />
+        <div *ngIf="isFieldInvalid('bachelorDegree', registrationForm)" class="text-danger">
+          Bachelor Degree is required.
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-5">
+        <label for="bachelorGPA" class="form-label">Bachelor GPA</label>
+        <input type="number" id="bachelorGPA" class="form-control" name="bachelorGPA" [(ngModel)]="model.bachelorGPA" required step="0.01"  max="4"/>
+        <div *ngIf="isFieldInvalid('bachelorGPA', registrationForm)" class="text-danger">
+          Bachelor GPA is required.
+        </div>
+        <div *ngIf="model.bachelorGPA !== null && model.bachelorGPA !== undefined && (model.bachelorGPA > 4 || model.bachelorGPA < 0)" class="text-danger">
+          Bachelor GPA should be between 0 and 4.
+        </div>
+      </div>
+
+      <div class="col-md-5">
+        <label for="md" class="form-label">MD Degree</label>
+        <input type="text" id="md" class="form-control" name="md" [(ngModel)]="model.md" />
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-5">
+        <label for="mdGPA" class="form-label">MD GPA</label>
+        <input type="number" id="mdGPA" class="form-control" name="mdGPA" [(ngModel)]="model.mdGPA" step="0.01"  max="4" />
+        <div *ngIf="model.mdGPA !== null && model.mdGPA !== undefined && (model.mdGPA > 4 || model.mdGPA < 0)" class="text-danger">
+          MD GPA should be between 0 and 4.
+        </div>
+      
+      </div>
+
+      <div class="col-md-5">
+        <label class="form-label">Looking for Internship</label>
+        <div class="form-check">
+          <input type="checkbox" id="lookingForInternship" class="form-check-input" name="lookingForInternship" [(ngModel)]="model.lookingForInternship" />
+          <label for="lookingForInternship" class="form-check-label">Yes</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-5">
+        <label for="resume" class="form-label">Resume (PDF)</label>
+        <input 
+          type="file" 
+          id="resume" 
+          class="form-control" 
+          name="resume" 
+          accept=".pdf" 
+          required 
+          (change)="onFileSelect($event)" 
+        />
+        <div *ngIf="isFieldInvalid('resume', registrationForm)" class="text-danger">
+          Resume is required.
+        </div>
+        <div *ngIf="fileError" class="text-danger">
+          Only PDF files are allowed.
+        </div>
+      </div>
+    </div>
+    
+   
+
+    <div class="text-center mb-4">
+      <button type="submit" class="btn btn-primary" [disabled]="registrationForm.invalid">Register</button>
+    </div>
+  </form>
+</div>

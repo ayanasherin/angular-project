@@ -1,0 +1,35 @@
+<!-- <app-navbar></app-navbar> -->
+
+<div class="container">
+    <div class="left">
+     
+    </div>
+    <div class="right">
+      <div class="form-container">
+        <h2>Login</h2>
+        <form (ngSubmit)="onSubmit(loginForm)" #loginForm="ngForm">
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" [(ngModel)]="model.email" required />
+          </div>
+          <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" [(ngModel)]="model.password" required />
+          </div>
+  
+          <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+  
+          <button type="submit">Login</button>
+          <div class="p1">
+            <p>
+              <a routerLink="/forgotpassword">Forgot Password?</a>
+            </p>
+            <p>
+              <a routerLink="/register">No account yet? Create one!</a>
+            </p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
