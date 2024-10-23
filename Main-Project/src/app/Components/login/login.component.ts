@@ -23,7 +23,7 @@ export class LoginComponent {
     
     this.authService.login(this.model).subscribe(
       (response) => {
-        console.log('Login successful', response);
+        console.log('Login successfull', response);
         // alert('Login successful.');
         this.authService.setLoggedIn(true); 
         this.router.navigate(['/dashboard']); 
