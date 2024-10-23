@@ -28,8 +28,7 @@ public class RegistrationController {
     public ResponseEntity<?> registerStudent(@Valid @ModelAttribute StudentDto studentDto) {
         Student registeredStudent = registrationService.createRegistration(studentDto);
 
-        // Return a JSON response for successful registration
-        return ResponseEntity.status(HttpStatus.CREATED).body(new RegistrationResponse("Registered Successfully"));
+        return ResponseEntity.status(HttpStatus.CREATED).body(new RegistrationResponse("Registered Successfuly"));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
